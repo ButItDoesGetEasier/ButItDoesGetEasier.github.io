@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>My Baby!!!</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(180deg, #cdefff, #e8faff);
+    overflow: hidden;
+    position: relative;
+}
+
+
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-120vh); }
+}
+
+
+h1 {
+    font-size: 22px;
+    color: #4da6ff;
+    margin-bottom: 10px;
+}
+
+#message {
+    min-height: 40px;
+    font-size: 15px;
+    color: #5c7ea6;
+    transition: 0.4s;
+}
+
+img {
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 15px;
+    display: none;
+    transition: 0.5s ease;
+}
+
+.buttons {
+    margin-top: 25px;
+}
+
+button {
+    width: 120px;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 8px;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: #4da6ff;
+    color: white;
+    box-shadow: 0 6px 15px rgba(77,166,255,0.4);
+}
+
+#noBtn {
+    background: #ffd6ec;
+    color: #ff7ab6;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+
+.letter-phase {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0;
+}
+
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.card {
+    width: 90%;
+    max-width: 380px;
+    padding: 20px 25px; /* slightly reduce padding */
+    border-radius: 30px;
+    background: #ffffffcc;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    position: relative;
+    max-height: 90vh; /* ensure it doesn't overflow screen */
+    overflow-y: auto; /* scroll if letter is too long */
+}
+
+.letter {
+    margin-top: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4d6c94;
+    opacity: 0;
+    overflow: hidden;      /* default: hidden before showing */
+    transition: 0.8s ease;
+    max-height: 0;         /* default: collapsed */
+    padding-right: 0;      /* no extra space before showing */
+}
+
+/* When letter is shown */
+.letter.show {
+    opacity: 1;
+    max-height: 5000px;     /* fixed height for scrolling */
+    overflow-y: auto;      /* enable vertical scroll */
+    padding-right: 10px;   /* prevent text hiding behind scrollbar */
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>My Lexy, will you be my Valentine?</h1>
+    <p id="message"></p>
+
+    <img id="image" src="emoji-turning-into-ash.gif" alt="memory">
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💙</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <div class="letter" id="letter">
+        Yippie!
+
+        Hello, my love. You slept extra early tonight, so I miss you a lot! Sleep well baby.
+        I only hope I can sleep and wake up next to you!
+
+        <br><br>
+
+        I can't say that I prayed for you to come into my life, because I don't believe in God, and I know you don't as well.
+        But I think I understand na why some people believe. A miracle like you exists e. It's like a higher being designed a person specifically for me.
+        What insane luck. Can the big bang really make someone as perfect as you? 
+
+        <br><br>
+
+        A strong case, but I still don't believe in that kind of God. Instead, will you give me the privilege of letting you be my religion?
+        Can I admire and worship you forever? 
+
+        <br><br>
+
+        I love you. I hope my actions and words can encapsulate just how much and intense this love is, but I don't think they're enough.
+        I'll try to show it, always. Because I always feel it e.
+
+        <br><br>
+
+        You already clicked yes so you agree to being my Valentine (you had a choice right), but will you allow me to show you this love, not just this Valentine's, but forever? 
+        Will you allow me to court you until the day I die? Will you allow me to give you all of me?
+
+        <br><br>
+
+        I hope okay lang naman sayo. I hope hindi naman abala. hehe
+
+        <br><br>
+
+        I love you, my baby!
+
+    </div>
+</div>
+
+<audio id="song" src="yippee-sound-effect_OBJQeKO8.mp3"></audio>
+<script>
+let noClicks = 0;
+let noScale = 1;
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const message = document.getElementById("message");
+const image = document.getElementById("image");
+const song = document.getElementById("song");
+const letter = document.getElementById("letter");
+const buttons = document.querySelector(".buttons");
+
+noBtn.addEventListener("click", () => {
+    noClicks++;
+
+    if (noClicks === 1) {
+        message.innerText = "please baby 🥺 i love you!!!";
+        image.src = "emoji-turning-into-ash.gif";
+        image.style.display = "block";
+        image.classList.add("fade-in");
+
+        noScale -= 0.2;
+        noBtn.style.opacity = "0.6";
+        noBtn.style.transform = `scale(${noScale})`;
+
+        yesBtn.style.transform = "scale(1.2)";
+    }
+
+    else if (noClicks === 2) {
+        message.innerText = "di mo na ba ko love? dahil ba ampangit ng gupit ko";
+        image.src = "beg-begging.gif";
+        image.classList.add("fade-in");
+
+        noScale -= 0.2;
+        noBtn.style.opacity = "0.4";
+        noBtn.style.transform = `scale(${noScale})`;
+
+        yesBtn.style.transform = "scale(1.35)";
+    }
+
+    else if (noClicks === 3) {
+        message.innerText = "kailangan ko po bang lumuhod? kasi gagawin ko 😭";
+        image.src = "spongebob-squarepants-begging.gif";
+        image.classList.add("fade-in");
+
+        noScale -= 0.2;
+        noBtn.style.opacity = "0.25";
+        noBtn.style.transform = `scale(${noScale})`;
+
+        yesBtn.style.transform = "scale(1.5)";
+    }
+
+    else if (noClicks === 4) {
+        message.innerText = "ayaw mo po talaga? wala na ba ko magagawa para mabago isip mo? pa-click na lang yung no if so";
+        image.src = "slide-hug.gif";
+        image.classList.add("fade-in");
+
+        noScale -= 0.2;
+        noBtn.style.opacity = "0.0";
+        noBtn.style.transform = `scale(${noScale})`;
+
+        yesBtn.style.transform = "scale(1.8)";
+    }
+});
+yesBtn.addEventListener("click", () => {
+    song.play();
+
+    // hide buttons, image, message, and header
+    buttons.style.display = "none";
+    image.style.display = "none";
+    message.style.display = "none"; // hide completely
+    const header = document.querySelector(".card h1");
+    header.style.display = "none";
+
+    // remove card padding top
+    const card = document.querySelector(".card");
+    card.classList.add("letter-phase");
+
+    // show letter
+    letter.classList.add("show");
+});
+
+</script>
+
+</body>
+</html>
